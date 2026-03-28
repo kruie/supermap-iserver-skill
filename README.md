@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SuperMap iServer Skill
 
 基于 SuperMap iServer REST API 的 GIS 服务器管理自动化 Skill。
@@ -138,3 +139,7 @@ kruie
 
 - [supermap-mcp-server](https://github.com/kruie/supermap-mcp-server) - MCP 服务器
 - [supermap-idesktop-skill](https://github.com/kruie/supermap-idesktop-skill) - iDesktopX Skill
+=======
+# supermap-iserver-skill
+SuperMap iServer Skill - GIS 服务器管理自动化（基于 REST API）
+>>>>>>> 5dc7d46de02a6d06d81c260ab6f221b198f075b7
