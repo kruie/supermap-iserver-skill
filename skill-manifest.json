@@ -1,0 +1,73 @@
+{
+  "name": "supermap-iserver-skill",
+  "version": "1.0.0",
+  "description": "SuperMap iServer Skill - GIS 服务器管理自动化（基于 REST API）",
+  "author": "kruie",
+  "license": "MIT",
+  "type": "skill",
+  "dependencies": {
+    "mcp": [],
+    "python": [
+      "requests>=2.28.0",
+      "pandas>=2.0.0"
+    ],
+    "system": [
+      "SuperMap iServer 11i/12i"
+    ]
+  },
+  "triggers": [
+    "iServer",
+    "SuperMap",
+    "GIS 服务",
+    "服务发布",
+    "WMS",
+    "WMTS",
+    "WFS",
+    "服务监控",
+    "缓存管理",
+    "集群管理",
+    "令牌认证"
+  ],
+  "capabilities": [
+    "service_publish",
+    "service_management",
+    "service_monitor",
+    "security_management",
+    "cache_management",
+    "cluster_management",
+    "rest_api"
+  ],
+  "configuration": {
+    "iserver_host": {
+      "description": "iServer host address",
+      "default": "localhost",
+      "required": false
+    },
+    "iserver_port": {
+      "description": "iServer port",
+      "default": 8090,
+      "required": false
+    },
+    "iserver_user": {
+      "description": "iServer username",
+      "required": true
+    },
+    "iserver_password": {
+      "description": "iServer password",
+      "required": true
+    }
+  },
+  "documentation": {
+    "main": "SKILL.md",
+    "references": [
+      "references/rest-api.md",
+      "references/security.md",
+      "references/deployment.md"
+    ]
+  },
+  "scripts": {
+    "rest_client": "scripts/rest_client.py",
+    "service_manager": "scripts/service_manager.py",
+    "service_monitor": "scripts/service_monitor.py"
+  }
+}
