@@ -195,6 +195,18 @@ export JAVA_OPTS="-Xms4g -Xmx8g -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
 
 ## 四、License 配置
 
+### 4.0 License 文件默认存储位置
+
+SuperMap 桌面端（iDesktopX）的 License 文件存储在系统标准目录：
+
+```
+C:\Program Files\Common Files\SuperMap\License\
+```
+
+常见 License 文件类型：`.lic`、`.licx`、`.lic12`、`.udlx`
+
+> **环境变量**：可通过 `SUPERMAP_LICENSE` 环境变量自定义路径。
+
 ### 4.1 联机 License
 
 ```bash
