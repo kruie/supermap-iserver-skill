@@ -78,11 +78,14 @@ SuperMap iServer 自动化采用 **MCP + Skill + REST API 三层架构**:
 │           SuperMap iServer 自动化体系                │
 ├─────────────────────────────────────────────────────┤
 │                                                      │
-│  MCP Server (iServer 服务层 - 待补充)                 │
-│  ├─ 服务发布工具 (地图/数据/分析/3D)                 │
-│  ├─ 服务管理工具 (启停/监控/缓存)                    │
-│  ├─ REST API 封装                                  │
-│  └─ 通过 mcp:// 前缀调用                            │
+│  MCP Server (iServer 服务层 - 10 个工具)            │
+│  ├─ 服务发布: iserver_publish_map_service           │
+│  ├─ 服务管理: iserver_start/stop/restart_service    │
+│  ├─ 服务查询: iserver_get_service_list/status       │
+│  ├─ 地图服务: iserver_get_map_info                  │
+│  ├─ 数据服务: iserver_query_data                    │
+│  ├─ 缓存管理: iserver_clear_cache                   │
+│  └─ 安全认证: iserver_get_token                     │
 │                                                      │
 │  Skill (智能指导层 - 本文档)                        │
 │  ├─ 工作流指导: 服务发布、管理、运维流程             │
@@ -105,10 +108,14 @@ SuperMap iServer 自动化采用 **MCP + Skill + REST API 三层架构**:
 | 场景 | 推荐方案 | 原因 |
 |------|----------|------|
 | 单次服务发布 | **MCP 工具** | 简单快速,无需代码 |
+| 服务启停管理 | **MCP 工具** | `iserver_start/stop/restart_service` |
+| 获取服务列表/状态 | **MCP 工具** | `iserver_get_service_list/status` |
+| 获取地图信息 | **MCP 工具** | `iserver_get_map_info` |
+| 查询数据服务 | **MCP 工具** | `iserver_query_data` 支持 SQL |
+| 获取令牌认证 | **MCP 工具** | `iserver_get_token` |
+| 清除缓存 | **MCP 工具** | `iserver_clear_cache` |
 | 批量服务发布 | **Skill scripts** | 灵活控制,支持循环 |
-| 服务启停管理 | **Skill scripts** | 状态检查,错误处理 |
 | 性能监控 | **Skill scripts** | 持续监控,统计分析 |
-| 简单查询 | **REST API** | 直接调用,快速响应 |
 | 复杂分析 | **REST API** | 功能完整,参数丰富 |
 | 集群部署 | **Skill scripts + REST API** | 多节点协调,状态同步 |
 
@@ -298,22 +305,22 @@ print(f"访问令牌: {token}")
 
 ---
 
-## MCP 工具补充建议
+## MCP 工具参考
 
-为了方便操作 iServer,建议补充以下 MCP 工具:
+已实现的 iServer MCP 工具（10 个）:
 
-| 工具名称 | 功能描述 | 参数 |
-|---------|---------|------|
-| `publish_map_service` | 发布地图服务 | workspace_path, map_name, service_name |
-| `publish_data_service` | 发布数据服务 | datasource_path, service_name |
-| `publish_analysis_service` | 发布分析服务 | workspace_path, service_name |
-| `start_service` | 启动服务 | service_name |
-| `stop_service` | 停止服务 | service_name |
-| `get_service_status` | 获取服务状态 | service_name |
-| `clear_cache` | 清除缓存 | service_name |
-| `get_token` | 获取访问令牌 | username, password |
-| `get_map` | 调用地图服务 | service_name, bounds, width, height |
-| `query_data` | 调用数据服务 | service_name, dataset_name, filter |
+| 工具名称 | 功能描述 | 关键参数 |
+|---------|---------|---------|
+| `iserver_get_token` | 获取认证令牌 | username, password |
+| `iserver_get_service_list` | 获取服务列表 | server_url, token |
+| `iserver_get_service_status` | 获取服务状态 | server_url, service_name |
+| `iserver_start_service` | 启动服务 | server_url, service_name |
+| `iserver_stop_service` | 停止服务 | server_url, service_name |
+| `iserver_restart_service` | 重启服务 | server_url, service_name |
+| `iserver_get_map_info` | 获取地图服务信息 | map_name |
+| `iserver_query_data` | 查询数据服务 | datasource_name, dataset_name, sql_filter |
+| `iserver_clear_cache` | 清除服务缓存 | service_name |
+| `iserver_publish_map_service` | 发布地图服务 | workspace_path, map_name, service_name |
 
 ---
 
@@ -458,6 +465,7 @@ A: 检查集群配置,节点间网络连接,同步间隔设置。
 
 ---
 
-**Skill 版本**: v1.0  
-**更新时间**: 2026-03-27  
+**Skill 版本**: v2.1
+**更新时间**: 2026-03-29
 **适用版本**: SuperMap iServer 11i (2025)
+**MCP Server 版本**: v2.1 (55 工具, 其中 iServer 10 个)
